@@ -1,0 +1,58 @@
+# OWNER BY Mertkaan just için antitarget Eklenti Ayarri
+
+detection:
+  # Ihlal puanlarinin kac saniyede bir temizlenecegi yani log mesala 5-5 olursa serverdan atar 30 saniyede temizliyor işte 
+  decay-time-seconds: 30
+  
+  # Kontrollerin sadece oyuncu elytra ile ucarken yapilmasi (Performans icin true tavsiye edilir) true kalsın geç bunu
+  check-only-gliding: true
+
+  # Auto Firework Modulu (Hizli slot degistirip havai fisek basma) bunu kafana göre ayarla benim ayarım 80ms 
+  auto-firework:
+    enabled: true
+    max-ms-threshold: 80
+    violation-threshold: 5
+
+  # Modul 1: Crosshair Kusursuzlugu (Aci degisim hizi sabitligi) bundan çok anlamıyorsan anlıyanlara sor ve ya bana tavsiyem kalsın böyle
+  rotation-consistency:
+    enabled: true
+    sample-size: 10
+    max-std-dev-threshold: 0.005
+    min-mean-delta: 0.1
+    violation-threshold: 3
+
+  # Modul 2: Hitbox Merkezine Bagimlilik (Miknatis gibi rakip merkezine kilitlenme) targetlenme bence böyle kalsın
+  center-mass-lock:
+    enabled: true
+    max-angle-deviation: 0.005
+    consecutive-hits-threshold: 5
+    violation-threshold: 2
+
+  # Modul 3: Fisek Patlama Anindaki Aci Sicramasi (Snap-to-Target diğer adıyla) böyle kalsın 
+  snap-to-target:
+    enabled: true
+    watch-ticks: 2
+    min-snap-angle: 30.0
+    max-lock-angle: 1.5
+    max-target-distance: 50.0
+    violation-threshold: 2
+
+  # Modul 4: Aci Sapmasi / Farkli Yone Bakarak Vurma (No-Look Hit) killaura bunu kullandıgınız dişer anticheatla göre ayarlarsınss
+  no-look-hit:
+    enabled: true
+    max-allowed-angle: 75.0
+    violation-threshold: 7
+
+# Ihlal Durumunda Yapilacak Islemler kickleniyor istersen banlansında onu pluginin değiştir kickleniyor şuanlık
+actions:
+  kick:
+    enabled: true
+    reason: "&8[&cRENACraftw&8] &cIllegal elytra behavior detected (%check% / %info%)."
+  
+  alert:
+    enabled: true
+    message: "&8[&cRENACraft&8] &e%player% &cfailed %check% &7(Info: %info%, VL: %vl%/%threshold%)"
+    
+  console-log:
+    enabled: true
+    message: "[RENACraft] %player% failed %check% (Info: %info%, VL: %vl%/%threshold%)"
